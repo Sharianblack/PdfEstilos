@@ -6,7 +6,7 @@ package models;
 
 public class Producto {
     //Encapsulamos y declaramos las variables del objeto producto
-    private long idProducto;
+    private Long idProducto;
     private String nombre;
     private String tipo;
     private double precio;
@@ -14,7 +14,7 @@ public class Producto {
     public Producto() {
     }
     //Este contructor recibe los parametros que inicializamos
-    public Producto(long idProducto, String nombre, String tipo, double precio) {
+    public Producto(Long idProducto, String nombre, String tipo, double precio) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -22,11 +22,11 @@ public class Producto {
     }
     //Permite el acceso a esos atributos
     //Si no es void retorna un valor
-    public long getIdProducto() {
+    public Long getIdProducto() {
         return idProducto;
     }
     //Modificar ingresar el metodo de un producto  y recibe un parametro y lo inicializa
-    public void setIdProducto(long idProducto) {
+    public void setIdProducto(Long idProducto) {
         this.idProducto = idProducto;
     }
 
