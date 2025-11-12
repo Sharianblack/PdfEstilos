@@ -10,9 +10,13 @@ public class LoginServiceImplement implements LoginService {
     public Optional<String> getUsername(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String username = (String) session.getAttribute("username");
-        if (username == null) {
+
+        // Si username NO es null, lo envolvemos con Optional.of().
+        if (username != null) {
             return Optional.of(username);
         }
+
+        // Si username es null, devolvemos Optional.empty().
         return Optional.empty();
     }
 }

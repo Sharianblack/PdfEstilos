@@ -6,7 +6,7 @@ import models.Producto;
 import java.util.Arrays;
 import java.util.List;
 
-public class ProductosServicesImplement extends HttpServlet {
+public class ProductosServicesImplement implements ProductoService {
 
     public List<Producto> listar() {
         return Arrays.asList(

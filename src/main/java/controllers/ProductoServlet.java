@@ -20,7 +20,7 @@ public class ProductoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        ProductosServicesImplement service = new ProductosServicesImplement();
+        ProductoService service = new ProductosServicesImplement();
         List<Producto> productos = service.listar();
 
         LoginService auth = new LoginServiceImplement();

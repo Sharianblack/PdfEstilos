@@ -13,9 +13,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
-@WebServlet({"/login", "/login.html"})
+@WebServlet({"/login", "/login.html"}) //este servlet responde a estas url
 public class LoginServlet extends HttpServlet {
-    final static String USERNAME = "Adri";
+    final static String USERNAME = "adri";
     final static String PASSWORD = "12345";
 
     @Override
@@ -24,6 +24,20 @@ public class LoginServlet extends HttpServlet {
         Optional<String> usernameOptional = auth.getUsername(req);
 
         if (usernameOptional.isPresent()) {
+            HttpSession session = req.getSession();
+            //recuperar el contador de la sesion
+            Integer contador = (Integer) session.getAttribute("contador");
+
+            //si no existe, se inicializa en 1
+            if (contador == null) {
+                contador = 1;
+            } else {
+                //si ya existe, lo incrementamos
+                contador++;
+            }
+            //guardamos el nuevo valor
+            session.setAttribute("contador", contador);
+
             resp.setContentType("text/html;charset=UTF-8");
             try (PrintWriter out = resp.getWriter()) {
                 out.println("<!DOCTYPE html>");
@@ -33,13 +47,14 @@ public class LoginServlet extends HttpServlet {
                 out.println("</head>");
                 out.println("<body>");
                 out.println("<h1>Hola " + usernameOptional.get() + " has iniciado sesion correctamente</h1>");
+                out.println("<p>Has iniciado sesión <span class='admin'>" + contador + "</span> veces.</p>");
                 out.println("<p><a href='" + req.getContextPath() + "/index.html'Volver a login</a></p>");
                 out.println("<p><a href='" + req.getContextPath() + "/Logout'Cerrar Sesion</a></p>");
                 out.println("</body>");
                 out.println("</html>");
             }
         }else {
-            getServletContext().getRequestDispatcher("/login.html").forward(req, resp);
+            getServletContext().getRequestDispatcher("/login.jsp").forward(req, resp);
         }
     }
     @Override
