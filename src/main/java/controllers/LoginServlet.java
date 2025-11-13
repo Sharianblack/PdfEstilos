@@ -44,25 +44,22 @@ public class LoginServlet extends HttpServlet {
                 out.println("<html>");
                 out.println("<head>");
                 out.println("<title>Hola " + usernameOptional.get() + "</title>");
-                // 1. **INCLUIR EL ARCHIVO DE ESTILOS**
+                //Link de los estilos
                 out.println("<link rel=\"stylesheet\" href=\"styles.css\">");
                 out.println("</head>");
                 out.println("<body>");
 
-                // 2. **APLICAR CLASE DE CONTENEDOR DE ÉXITO**
                 // Usamos body con display:flex para centrar y aplicamos las clases 'container success-message'
                 out.println("<div class=\"container success-message\">");
 
                 out.println("<h1>Hola " + usernameOptional.get() + " has iniciado sesion correctamente</h1>");
 
-                // 3. **Párrafo con el contador**
+                // Párrafo con el contador
                 out.println("<p>Has iniciado sesión <span class='admin'>" + contador + "</span> veces.</p>");
 
-                // 4. **Enlaces estilizados como botones (usando <a>)**
                 out.println("<a href='" + req.getContextPath() + "/index.html'>Volver al inicio</a>");
                 out.println("<a href='" + req.getContextPath() + "/logout'>Cerrar Sesión</a>");
 
-                // Cerrar el contenedor
                 out.println("</div>");
 
                 out.println("</body>");
