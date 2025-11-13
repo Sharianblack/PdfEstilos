@@ -21,7 +21,7 @@ import java.util.Optional;
 //aqui se cambio lo que anteriormente era "/agregar-carro"
 //a "/agregar-carro?id=?"
 //asi el direccionamiento esta bien, y sale el 404 porque no hay datos aun
-@WebServlet("/agregar-carro?id=?")
+@WebServlet("/agregar-carro")
 public class AgregarCarroServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -61,6 +61,6 @@ public class AgregarCarroServlet extends HttpServlet {
         }
 
         // Una vez agregado (o no si el producto no existía), redirigimos al usuario a la página de ver carrito.
-        resp.sendRedirect(req.getContextPath() + "/ver-carro.jsp");
+        resp.sendRedirect(req.getContextPath() + "/ver-carro");
     }
 }

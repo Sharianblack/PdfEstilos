@@ -113,7 +113,7 @@ public class ProductoServlet extends HttpServlet {
                 }
                 out.println("</tr>");
             });
-
+            out.println("<td> <a href=\"index.html\">Regresar</a> </td>");
             // CIERRE DE ETIQUETAS
             out.println("</tbody>");
             out.println("</table>");
