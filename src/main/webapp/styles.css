@@ -1,112 +1,372 @@
-/* ===================================================================
-   ESTILOS PARA EL CARRO DE COMPRAS (carro.jsp)
-   =================================================================== */
-
-.cart-container {
-    /* Contenedor principal centrado y con fondo blanco */
-    background-color: #ffffff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 95%;
-    max-width: 900px;
-    text-align: center;
-    margin: 40px auto;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-/* Título del carro */
-.cart-container h1 {
-    color: #700063; /* tono morado igual que productos */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000000 0%, #0a3d0a 50%, #000000 100%);
+    color: #e4e4e4;
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Contenedor Principal */
+.container {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 60px rgba(0, 255, 0, 0.15);
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos */
+h1 {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 50%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 30px;
+    font-size: 2em;
+    font-weight: 800;
+    border-bottom: 2px solid rgba(0, 255, 0, 0.3);
+    padding-bottom: 15px;
+    text-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
+}
+
+/* Enlaces/Botones generales */
+a {
+    display: block;
+    text-decoration: none;
+    color: #00ff00;
+    background: linear-gradient(135deg, #000000 0%, #0a3d0a 100%);
+    border: 2px solid #00ff00;
+    padding: 14px 24px;
+    margin: 15px 0;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+}
+
+a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+a:hover::before {
+    left: 100%;
+}
+
+a:hover {
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    color: #000000;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 25px rgba(0, 255, 0, 0.6);
+    border-color: #39ff14;
+}
+
+br {
+    display: none;
+}
+
+/* ===== LOGIN BOX ===== */
+.login-box {
+    max-width: 400px;
+    padding: 35px;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.login-box h1 {
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin-bottom: 25px;
     font-size: 1.8em;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 10px;
 }
 
-/* Mensaje cuando no hay productos */
-.cart-empty {
-    font-size: 1.2em;
-    color: #888;
-    text-align: center;
-    margin: 30px 0;
+.login-box form div {
+    margin-bottom: 20px;
+    text-align: left;
 }
 
-/* Tabla del carro */
-.cart-table {
+.login-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9em;
+    font-weight: 600;
+    color: #00ff00;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid rgba(0, 255, 0, 0.3);
+    border-radius: 10px;
+    font-size: 1em;
+    color: #00ff00;
+    transition: all 0.3s ease;
+}
+
+.login-box input[type="text"]:focus,
+.login-box input[type="password"]:focus {
+    border-color: #00ff00;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+    outline: none;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Botón Submit */
+.btn-submit {
+    display: block;
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #000000;
+    padding: 14px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(0, 255, 0, 0.6);
+    background: linear-gradient(135deg, #39ff14 0%, #00ff00 100%);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* ===== MENSAJE DE ÉXITO ===== */
+.success-message {
+    background: linear-gradient(135deg, rgba(0, 255, 0, 0.1) 0%, rgba(0, 200, 0, 0.1) 100%);
+    border: 2px solid #00ff00;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.3);
+}
+
+.success-message h1 {
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: none;
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    font-size: 1.1em;
+    color: #00ff00;
+    margin-bottom: 20px;
+}
+
+.success-message a {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #000000;
+    box-shadow: 0 4px 20px rgba(0, 255, 0, 0.4);
+    border: 2px solid #00ff00;
+}
+
+.success-message a:hover {
+    background: linear-gradient(135deg, #39ff14 0%, #00ff00 100%);
+    box-shadow: 0 6px 30px rgba(0, 255, 0, 0.6);
+}
+
+/* ===== LISTA DE PRODUCTOS ===== */
+.product-list {
+    max-width: 950px;
+}
+
+.product-list h1 {
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== TABLAS ===== */
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 255, 0, 0.2);
+    border: 1px solid rgba(0, 255, 0, 0.2);
 }
 
-/* Encabezado */
-.cart-table th {
-    background-color: #700063;
-    color: white;
-    padding: 12px 15px;
-    text-align: center;
-    font-weight: 600;
+thead th {
+    background: linear-gradient(135deg, #000000 0%, #0a3d0a 100%);
+    color: #00ff00;
+    padding: 16px 20px;
+    text-align: left;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9em;
+    border-bottom: 2px solid #00ff00;
 }
 
-/* Celdas del cuerpo */
-.cart-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-    text-align: center;
-    color: #333;
+tbody tr {
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid rgba(0, 255, 0, 0.2);
+    transition: all 0.3s ease;
 }
 
-/* Filas pares estilo cebra */
-.cart-table tr:nth-child(even) {
-    background-color: #fafafa;
+tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.8);
 }
 
-/* Hover sobre fila */
-.cart-table tr:hover {
-    background-color: #f5f5f5;
+tbody tr:hover {
+    background: rgba(0, 255, 0, 0.15);
+    transform: scale(1.01);
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
 }
 
-/* Totales */
-.cart-table .totales td {
+tbody td {
+    padding: 14px 20px;
+    color: #e4e4e4;
+}
+
+/* Columna de precios */
+.price-column {
     font-weight: bold;
-    background-color: #f8f8f8;
-}
-
-.cart-table .total-final td {
-    background-color: #700063;
-    color: #fff;
-    font-weight: bold;
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: right;
     font-size: 1.1em;
 }
 
-/* Enlaces de acción */
+.hidden-price-placeholder {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.3);
+    text-align: right;
+}
+
+/* ===== ESTILOS PARA CARRO.JSP ===== */
+.cart-empty {
+    font-size: 1.2em;
+    color: #00ff00;
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.totales td {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.4) !important;
+    border-top: 1px solid rgba(0, 255, 0, 0.3);
+    padding: 12px 20px !important;
+}
+
+.total-final td {
+    background: linear-gradient(135deg, #000000 0%, #0a3d0a 100%) !important;
+    color: #00ff00 !important;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-top: 2px solid #00ff00 !important;
+    padding: 15px 20px !important;
+}
+
 .cart-actions {
     text-align: center;
     margin-top: 30px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .cart-actions a {
     display: inline-block;
-    background-color: #700063;
-    color: white;
+    background: linear-gradient(135deg, #000000 0%, #0a3d0a 100%);
+    border: 2px solid #00ff00;
+    color: #00ff00;
     padding: 12px 25px;
-    border-radius: 6px;
+    border-radius: 10px;
     text-decoration: none;
-    margin: 10px;
     font-weight: 600;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.3);
+    margin: 5px;
 }
 
 .cart-actions a:hover {
-    background-color: #A020F0;
+    background: linear-gradient(135deg, #00ff00 0%, #39ff14 100%);
+    color: #000000;
     transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 255, 0, 0.5);
 }
 
-/* Enlace gris (Volver) */
 .cart-actions a.volver {
-    background-color: #6c757d;
+    background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+    border-color: #666666;
+    color: #cccccc;
 }
 
 .cart-actions a.volver:hover {
-    background-color: #5a6268;
+    background: linear-gradient(135deg, #333333 0%, #555555 100%);
+    border-color: #00ff00;
+    color: #00ff00;
+}
+
+.btn-download-pdf {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%) !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    border: none !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-download-pdf:hover {
+    background: linear-gradient(135deg, #39ff14 0%, #00ff00 100%) !important;
+    box-shadow: 0 6px 30px rgba(0, 255, 0, 0.7) !important;
 }
