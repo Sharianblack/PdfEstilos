@@ -1,62 +1,78 @@
 <%@ page import="models.DetalleCarro" %>
-<%@ page import="models.ItemCarro" %><%--
-  Created by IntelliJ IDEA.
-  User: ndadri
-  Date: 13/11/2025
-  Time: 8:44
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="models.ItemCarro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%--traemos la sesion de scriplets--%>
 <%
     DetalleCarro detalleCarro = (DetalleCarro) session.getAttribute("carro");
 %>
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Carro de compras</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/styles.css">
 </head>
 <body>
-<h1>Carro de compras</h1>
-<%
-    if (detalleCarro == null || detalleCarro.getItem().isEmpty()) {%>
-<p>Lo sentimos no hay productos en el carro de compras !</p>
-<%} else {%>
-<table>
-    <tr>
-        <td>IdProducto</td>
-        <td>Nombre</td>
-        <td>Precio</td>
-        <td>Cantidad</td>
-        <td>Subtotal</td>
-    </tr>
+<div class="container product-list">
+    <h1>Carro de compras</h1>
+
     <%
-        for (ItemCarro item : detalleCarro.getItem()){
+        if (detalleCarro == null || detalleCarro.getItem().isEmpty()) {
     %>
-    <tr>
-        <td><%=item.getProducto().getIdProducto()%></td>
-        <td><%=item.getProducto().getNombre()%></td>
-        <td><%=item.getProducto().getPrecio()%></td>
-        <td><%=item.getCantidad()%></td>
-        <td><%=item.getSubtotal()%></td>
-    </tr>
+    <p class="cart-empty">Lo sentimos no hay productos en el carro de compras!</p>
+    <div class="cart-actions">
+        <a href="<%=request.getContextPath()%>/productos">Ir a productos</a>
+        <a href="<%=request.getContextPath()%>/index.html" class="volver">Volver</a>
+    </div>
+    <%
+    } else {
+    %>
+
+    <table>
+        <thead>
+        <tr>
+            <th>IdProducto</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Subtotal</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%
+            for (ItemCarro item : detalleCarro.getItem()){
+        %>
+        <tr>
+            <td><%=item.getProducto().getIdProducto()%></td>
+            <td><%=item.getProducto().getNombre()%></td>
+            <td class="price-column">$<%=String.format("%.2f", item.getProducto().getPrecio())%></td>
+            <td><%=item.getCantidad()%></td>
+            <td class="price-column">$<%=String.format("%.2f", item.getSubtotal())%></td>
+        </tr>
+        <% } %>
+        <tr class="totales">
+            <td colspan="4" style="text-align: right;"><b>Subtotal:</b></td>
+            <td class="price-column">$<%= String.format("%.2f", detalleCarro.getSubtotal()) %></td>
+        </tr>
+        <tr class="totales">
+            <td colspan="4" style="text-align: right;"><b>IVA (15%):</b></td>
+            <td class="price-column">$<%= String.format("%.2f", detalleCarro.getIva()) %></td>
+        </tr>
+        <tr class="total-final">
+            <td colspan="4" style="text-align: right"><b>TOTAL:</b></td>
+            <td class="price-column"><b>$<%=String.format("%.2f", detalleCarro.getTotal())%></b></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="cart-actions">
+        <a href="<%=request.getContextPath()%>/descargar-factura" class="btn-download-pdf">
+            📄 Descargar Factura PDF
+        </a>
+        <a href="<%=request.getContextPath()%>/productos">Seguir Comprando</a>
+        <a href="<%=request.getContextPath()%>/index.html" class="volver">Volver</a>
+    </div>
+
     <% } %>
-    <tr>
-        <td colspan="4" style="text-align: right;"><b>Subtotal:</b></td>
-        <!-- se usa el "String.format("%.2f") para que solo se muestren 2 decimales -->
-        <td><%= String.format("%.2f", detalleCarro.getSubtotal()) %></td>
-    </tr>
-    <tr>
-        <td colspan="4" style="text-align: right;"><b>IVA (15%):</b></td>
-        <td><%= String.format("%.2f", detalleCarro.getIva()) %></td>
-    </tr>
-    <tr>
-        <td colspan="4" style="text-align: right">Total: </td>
-        <td><%=String.format("%.2f", detalleCarro.getTotal())%></td>
-    </tr>
-</table>
-<% } %>
-<p><a href="<%=request.getContextPath()%>/productos">Seguir Comprando</a></p>
-<p><a href="<%=request.getContextPath()%>/index.html">Volver</a></p>
+</div>
 </body>
 </html>
